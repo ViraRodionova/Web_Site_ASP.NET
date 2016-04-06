@@ -1,0 +1,80 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>My WebSite</title>
+
+    <script type="text/javascript" src='<%= Page.ResolveUrl("~/JavaScript/jquery-1.3.2.min.js") %>'></script>
+    <script type="text/javascript">
+        function mainmenu() {
+            $(" #nav ul ").css({ display: "none" }); //Opera Fix
+
+            $(" #nav li ").hover(function () {
+                $(this).find('ul:first').css({ visibility: "visible", display: "none" }).show(400);
+            }
+            , function () {
+                $(this).find('ul:first').css({ visibility: "hidden" });
+            }
+        );
+        }
+
+        $(document).ready(function () {
+            mainmenu();
+        });
+    </script>
+    
+    <link rel="stylesheet" type="text/css" href="~/Styles/StyleSheet.css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="wrapper">
+            <div id="banner">
+
+            </div>
+
+            <div id="navigation">
+                <ul id="nav">
+                    <li><a href='<%= Page.ResolveUrl("~/Pages/Home.aspx") %>'>Home</a></li>
+                    <li><a href="#">Reviews</a>
+                        <ul>
+                            <li><a href='<%= Page.ResolveUrl("~/Pages/Coffee.aspx") %>'>Coffee</a></li>
+                            <li><a href="#">Coffee Shops</a></li>
+                            <li><a href="#">Coffee brands</a></li>
+                        </ul>
+                    </li>
+                    <li><a href='<%= Page.ResolveUrl("~/Pages/Shop.aspx") %>'>Shop</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Managment</a>
+                        <ul>
+                            <li><a href='<%= Page.ResolveUrl("~/Pages/Coffee_Overview.aspx") %>'>Coffee</a></li>
+                            <li><a href='<%= Page.ResolveUrl("~/Pages/Account/Admin.aspx") %>'>Users</a></li>
+                            <li><a href='<%= Page.ResolveUrl("~/Pages/Orders.aspx") %>'>Orders</a></li>
+
+                        </ul>
+                    </li>
+                </ul>
+
+                <div id="login" align="right">
+                    <asp:Label ID="lblLogin" runat="server" Text="" ForeColor="White"></asp:Label>
+                    <asp:LinkButton ID="LinkButton1" runat="server" ForeColor="White" OnClick="LinkButton1_Click">LinkButton</asp:LinkButton>
+                </div>
+
+            </div>
+
+            <div id="content_area">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            </div>
+
+            <div id="slidebar">
+
+            </div>
+
+            <div id="footer">
+                <p>All rights reserved.</p>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
