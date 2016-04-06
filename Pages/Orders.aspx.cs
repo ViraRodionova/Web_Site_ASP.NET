@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -68,8 +69,27 @@ public partial class Pages_Orders : System.Web.UI.Page
         }
     }
 
-    private void GenerateLineChart(string sumObject, string groupByObject)
+    private void GenerateLineChart(string sumObject, string groupByObject, string title, AjaxControlToolkit.LineChart chart)
     {
+        string query = string.Format("SELECT SUM({0}), {1} FROM orders GROUP BY {1}", sumObject, groupByObject);
 
+        //todo: create following method un cinnection class
+        DataTable dt = ConnectionClass.GetChartDate(query);
+
+        decimal[] x = new decimal[dt.Rows.Count];
+        string[] y = new string[dt.Columns.Count];
+
+        for(int i = 0; i < dt.Rows.Count; i++)
+        {
+            x[i] = Convert.ToInt32(dt.Rows[i][0].ToString());
+            y[i] = dt.Rows[i][1].ToString();
+        }
+
+        chart.Series.Add(new AjaxControlToolkit.LineChartSeries { Data = x });
+        chart.CategoriesAxis = string.Join(",", y);
+        chart.ChartTitle = title;
+
+        if (x.Length > 3)
+            chart.ChartWidth = (x.Length * 75).ToString();
     }
 }

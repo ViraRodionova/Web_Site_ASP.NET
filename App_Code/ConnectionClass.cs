@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -105,6 +106,29 @@ public static class ConnectionClass
             conn.Close();
             command.Parameters.Clear();
         }
+    }
+
+    public static DataTable GetChartDate(string query)
+    {
+        command.CommandText = query;
+        DataTable dt = new DataTable();
+
+        try
+        {
+            conn.Open();
+
+            using(SqlDataAdapter sda = new SqlDataAdapter())
+            {
+                sda.SelectCommand = command;
+                sda.Fill(dt);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return dt;
     }
 
     public static User LogInUser(string login, string password)
