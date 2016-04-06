@@ -266,4 +266,91 @@ public static class ConnectionClass
         }
         return orderList;
     }
+
+    public static User GetUserDetails(string userName)
+    {
+        string query = string.Format("SELECT * FROM users WHERE name = '{0}'", userName);
+        command.CommandText = query;
+        User user = null;
+
+        try
+        {
+            conn.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                string name = reader.GetString(1);
+                string password = reader.GetString(2);
+                string email = reader.GetString(3);
+                string userType = reader.GetString(4);
+
+                user = new User(id, name, password, email, userType);
+            }
+        }
+        finally
+        {
+            conn.Close();
+        }
+
+        return user;
+    }
+
+    public static ArrayList GetDetailedOrders(string client, DateTime date)
+    {
+        string query = @"SELECT id, product, amount, price, orderShipped
+                            FROM orders
+                            WHERE client = @client AND date = @date";
+        command.CommandText = query;
+        ArrayList orderList = new ArrayList();
+
+        try
+        {
+            conn.Open();
+            command.Parameters.Add(new SqlParameter("@client", client));
+            command.Parameters.Add(new SqlParameter("@date", date));
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                string product = reader.GetString(1);
+                int amount = reader.GetInt32(2);
+                double price = reader.GetDouble(3);
+                bool orderShipped = reader.GetBoolean(4);
+
+                Order order = new Order(id, client, product, amount, price, date, orderShipped);
+                orderList.Add(order);
+            }
+        }
+        finally
+        {
+            conn.Close();
+            command.Parameters.Clear();
+        }
+        return orderList;
+    }
+
+    public static void UpdateOrders(string client, DateTime date)
+    {
+        string query = @"UPDATE orders
+                            SET orderShipped = 1
+                            WHERE client = @client AND date = @date";
+        command.CommandText = query;
+
+        try
+        {
+            conn.Open();
+            command.Parameters.Add(new SqlParameter("@client", client));
+            command.Parameters.Add(new SqlParameter("@date", date));
+            command.ExecuteNonQuery();
+
+        }
+        finally
+        {
+            conn.Close();
+            command.Parameters.Clear();
+        }
+    }
 }

@@ -41,6 +41,6 @@ product, price, orderShipped">
             <asp:QueryStringParameter DbType="DateTime" Name="date" QueryStringField="date" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:Button ID="btnShip" runat="server" Text="Ship Order!" />
+    <asp:Button ID="btnShip" runat="server" OnClick="btnShip_Click" Text="Ship Order!" />
 </asp:Content>
 
