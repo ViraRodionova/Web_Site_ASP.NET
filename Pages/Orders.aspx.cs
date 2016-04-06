@@ -67,4 +67,9 @@ public partial class Pages_Orders : System.Web.UI.Page
             //TODO: Closed orders
         }
     }
+
+    private void GenerateLineChart(string sumObject, string groupByObject)
+    {
+
+    }
 }

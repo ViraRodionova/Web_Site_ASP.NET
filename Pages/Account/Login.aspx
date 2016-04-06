@@ -20,7 +20,7 @@
                 <asp:Button ID="btnLogin" runat="server" Text="Login" OnClick="btnLogin_Click" />
                 <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                 <br />
-                <asp:LinkButton ID="LinkButton2" runat="server" PostBackUrl="~/Pages/Account/Registration.aspx">Register</asp:LinkButton>
+                <asp:LinkButton ID="LinkButton2" runat="server" PostBackUrl="~/Pages/Account/Registration.aspx" CausesValidation="False">Register</asp:LinkButton>
             </td>
         </tr>
     </table>
