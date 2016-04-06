@@ -15,6 +15,9 @@ public partial class Pages_Orders : System.Web.UI.Page
     {
         if (txtOpenOrders1.Text != "" && txtOpenOrders2.Text != "")
             GenerateOrders(txtOpenOrders1.Text, txtOpenOrders2.Text, false);
+
+        GenerateLineChart("amount", "client", "Orders per customer", LineChart1);
+        //GenerateLineChart("amount", "DATETIME(month, date) + ' ' + DATETIME(YEAR, date)", "Units sold per month", LineChart2);
     }
 
     private void GenerateOrders(string beginDate, string endDate, bool shipped)
@@ -77,7 +80,7 @@ public partial class Pages_Orders : System.Web.UI.Page
         DataTable dt = ConnectionClass.GetChartDate(query);
 
         decimal[] x = new decimal[dt.Rows.Count];
-        string[] y = new string[dt.Columns.Count];
+        string[] y = new string[dt.Rows.Count];
 
         for(int i = 0; i < dt.Rows.Count; i++)
         {

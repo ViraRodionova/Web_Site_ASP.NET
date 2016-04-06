@@ -4,7 +4,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
-    <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" Width="744px" Height="231px">
+    <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" Width="744px">
         <ajaxToolkit:TabPanel runat="server" HeaderText="TabPanel1" ID="TabPanel1">
             <HeaderTemplate>
                 Open Orders<br />
@@ -30,7 +30,7 @@
                 Analytics<br />
             </HeaderTemplate>
             <ContentTemplate>
-                <ajaxToolkit:LineChart ID="LineChart1" runat="server" AreaDataLabel="" BaseLineColor="" CategoriesAxis="" CategoryAxisLineColor="" ChartTitle="" ChartTitleColor="" Height="374px" Theme="" TooltipBackgroundColor="" TooltipBorderColor="" TooltipFontColor="" ValueAxisLineColor="" ValueAxisLines="0">
+                <ajaxToolkit:LineChart ID="LineChart1" runat="server" AreaDataLabel="" BaseLineColor="" CategoriesAxis="" CategoryAxisLineColor="" ChartTitle="" ChartTitleColor="" Height="450px" Theme="" TooltipBackgroundColor="" TooltipBorderColor="" TooltipFontColor="" ValueAxisLineColor="" ValueAxisLines="0">
                 </ajaxToolkit:LineChart>
                 <br />
                 <ajaxToolkit:LineChart ID="LineChart2" runat="server">
