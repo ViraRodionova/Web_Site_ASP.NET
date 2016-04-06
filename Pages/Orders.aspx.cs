@@ -13,6 +13,8 @@ public partial class Pages_Orders : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        AuthenticateAdministrator();
+
         if (txtOpenOrders1.Text != "" && txtOpenOrders2.Text != "")
             GenerateOrders(txtOpenOrders1.Text, txtOpenOrders2.Text, false);
 
@@ -94,5 +96,11 @@ public partial class Pages_Orders : System.Web.UI.Page
 
         if (x.Length > 3)
             chart.ChartWidth = (x.Length * 75).ToString();
+    }
+
+    private void AuthenticateAdministrator()
+    {
+        if ((string)Session["type"] != "administrator")
+            Response.Redirect("~/Pages/Account/Login.aspx");
     }
 }
